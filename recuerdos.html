@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nuestros recuerdos ♡</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --fondo: #100b0e;
+            --rosa: #d99aaa;
+            --rosa-claro: #f0c5cf;
+            --vino: #762d43;
+            --vino-oscuro: #482044;
+            --texto: #f5e8eb;
+            --texto-suave: #bdaab0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--fondo);
+            color: var(--texto);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(
+                var(--rosa) 0.7px,
+                transparent 0.7px
+            );
+            background-size: 30px 30px;
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* ENCABEZADO */
+
+        .barra {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 8%;
+            border-bottom: 1px solid #ffffff18;
+            animation: aparecer 1s ease both;
+            gap: 20px;
+        }
+
+        .marca {
+            color: var(--rosa);
+            font-size: 11px;
+            letter-spacing: 4px;
+            font-weight: 400;
+        }
+
+        .corazon {
+            color: var(--rosa);
+            font-size: 23px;
+            animation: latido 2s infinite;
+            flex-shrink: 0;
+        }
+
+        /* PRESENTACIÓN */
+
+        .contenedor {
+            width: 100%;
+            max-width: 1000px;
+            margin: auto;
+            padding: 75px 8% 90px;
+        }
+
+        .etiqueta {
+            color: var(--rosa);
+            font-size: 10px;
+            letter-spacing: 5px;
+            text-align: center;
+            margin-bottom: 25px;
+            animation: aparecer 1s ease both;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(45px, 8vw, 78px);
+            font-weight: 400;
+            line-height: 1.05;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: subir 1s ease both;
+        }
+
+        h1 span {
+            color: var(--rosa);
+            font-style: italic;
+        }
+
+        .subtitulo {
+            color: var(--texto-suave);
+            font-size: 12px;
+            font-weight: 300;
+            line-height: 2;
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        /* FRASE INTRODUCTORIA */
+
+        .introduccion {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .introduccion p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 25px;
+            line-height: 1.5;
+            color: var(--rosa-claro);
+            font-style: italic;
+        }
+
+        /* REPRODUCTOR */
+
+        .reproductor {
+            max-width: 650px;
+            margin: auto;
+            padding: 18px;
+            background: linear-gradient(
+                145deg,
+                #21141b,
+                #160e13
+            );
+            border: 1px solid #d99aaa45;
+            box-shadow: 0 20px 70px #00000050;
+            animation: subir 1.2s ease both;
+        }
+
+        .marco-video {
+            position: relative;
+            width: 100%;
+            background: #080608;
+            overflow: hidden;
+            border: 1px solid #d99aaa20;
+        }
+
+        video {
+            display: block;
+            width: 100%;
+            max-height: 65vh;
+            aspect-ratio: 9 / 16;
+            object-fit: contain;
+            background: #080608;
+        }
+
+        /* INFORMACIÓN DEL VIDEO */
+
+        .informacion {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 22px 5px 18px;
+        }
+
+        .titulo-video {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 27px;
+            color: var(--rosa-claro);
+        }
+
+        .contador {
+            font-size: 10px;
+            color: var(--rosa);
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+
+        /* BARRA DE PROGRESO */
+
+        .progreso-fondo {
+            height: 2px;
+            width: 100%;
+            background: #ffffff18;
+            margin-bottom: 20px;
+        }
+
+        .progreso {
+            height: 100%;
+            width: 0%;
+            background: var(--rosa);
+            transition: width 0.2s linear;
+        }
+
+        /* CONTROLES */
+
+        .controles {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .control {
+            background: transparent;
+            color: var(--rosa-claro);
+            border: 1px solid #d99aaa70;
+            padding: 13px 18px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .control:hover {
+            background: var(--vino);
+            border-color: var(--rosa);
+        }
+
+        .control-principal {
+            background: var(--vino);
+            border-color: #9b4966;
+        }
+
+        .control-principal:hover {
+            background: var(--vino-oscuro);
+        }
+
+        .nota {
+            color: var(--texto-suave);
+            font-size: 10px;
+            text-align: center;
+            line-height: 1.9;
+            margin-top: 22px;
+        }
+
+        /* MENSAJE FINAL */
+
+        .final {
+            display: none;
+            max-width: 650px;
+            margin: 35px auto 0;
+            padding: 35px 25px;
+            text-align: center;
+            border: 1px solid #d99aaa40;
+            background: #191015;
+            animation: subir 1s ease both;
+        }
+
+        .final h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 35px;
+            font-weight: 400;
+            color: var(--rosa-claro);
+            margin-bottom: 15px;
+        }
+
+        .final p {
+            color: var(--texto-suave);
+            font-size: 12px;
+            line-height: 2;
+        }
+
+        .final span {
+            display: block;
+            color: var(--rosa);
+            font-size: 25px;
+            margin-top: 18px;
+        }
+
+        /* DECORACIÓN */
+
+        .decoracion {
+            text-align: center;
+            color: var(--rosa);
+            font-size: 18px;
+            letter-spacing: 12px;
+            margin: 45px 0;
+            opacity: 0.8;
+        }
+
+        /* BOTONES DE NAVEGACIÓN */
+
+        .navegacion {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .boton {
+            display: inline-block;
+            padding: 15px 25px;
+            color: var(--rosa-claro);
+            text-decoration: none;
+            border: 1px solid #d99aaa70;
+            background: transparent;
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-align: center;
+            transition: 0.3s ease;
+        }
+
+        .boton:hover {
+            background: var(--vino);
+            border-color: var(--vino);
+            transform: translateY(-3px);
+        }
+
+        .boton-especial {
+            background: var(--vino);
+            border-color: #9b4966;
+        }
+
+        .boton-especial:hover {
+            background: var(--vino-oscuro);
+            border-color: var(--rosa);
+        }
+
+        /* PIE DE PÁGINA */
+
+        footer {
+            padding: 25px 8%;
+            border-top: 1px solid #ffffff18;
+            text-align: center;
+            color: var(--texto-suave);
+            font-size: 9px;
+            letter-spacing: 3px;
+            line-height: 2;
+        }
+
+        /* ANIMACIONES */
+
+        @keyframes aparecer {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes subir {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes latido {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        /* CELULARES */
+
+        @media (max-width: 750px) {
+            .barra {
+                padding: 22px 7%;
+            }
+
+            .marca {
+                font-size: 11px;
+                letter-spacing: 4px;
+            }
+
+            .contenedor {
+                padding: 60px 7% 75px;
+            }
+
+            .etiqueta {
+                font-size: 9px;
+                letter-spacing: 4px;
+                line-height: 1.8;
+            }
+
+            .subtitulo {
+                font-size: 11px;
+            }
+
+            .introduccion p {
+                font-size: 23px;
+            }
+
+            .reproductor {
+                padding: 12px;
+            }
+
+            video {
+                max-height: 60vh;
+            }
+
+            .titulo-video {
+                font-size: 23px;
+            }
+
+            .controles {
+                gap: 10px;
+            }
+
+            .control {
+                padding: 12px 14px;
+                font-size: 9px;
+                letter-spacing: 1px;
+            }
+
+            .navegacion {
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            .boton {
+                width: 100%;
+                max-width: 300px;
+                padding: 14px 15px;
+                font-size: 9px;
+                letter-spacing: 2px;
+            }
+
+            footer {
+                font-size: 8px;
+                letter-spacing: 2px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .barra {
+                padding: 20px 6%;
+                gap: 12px;
+            }
+
+            .marca {
+                font-size: 10px;
+                letter-spacing: 3px;
+                line-height: 1.8;
+            }
+
+            .contenedor {
+                padding-right: 6%;
+                padding-left: 6%;
+            }
+
+            .informacion {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="barra">
+        <div class="marca">
+            UN REGALO ESPECIAL PARA ALGUIEN ESPECIAL
+        </div>
+
+        <div class="corazon">♡</div>
+    </header>
+
+    <main class="contenedor">
+
+        <p class="etiqueta">
+            MOMENTOS QUE SE QUEDAN
+        </p>
+
+        <h1>
+            Un poquito de<br>
+            <span>nuestra historia.</span>
+        </h1>
+
+        <p class="subtitulo">
+            Pequeños clips, muchas emociones<br>
+            y recuerdos que merecen quedarse.
+        </p>
+
+        <div class="introduccion">
+            <p>
+                Si pudiera guardar estos momentos<br>
+                en un solo lugar, sería aquí. ♡
+            </p>
+        </div>
+
+        <!-- RECOPILACIÓN DE VIDEOS -->
+
+        <section class="reproductor">
+
+            <div class="marco-video">
+
+                <video
+                    id="video"
+                    controls
+                    playsinline
+                    preload="metadata"
+                >
+                    <source src="video1.mp4" type="video/mp4">
+                    Tu navegador no puede reproducir este video.
+                </video>
+
+            </div>
+
+            <div class="informacion">
+
+                <h2 class="titulo-video" id="tituloVideo">
+                    Recuerdos ♡
+                </h2>
+
+                <span class="contador" id="contador">
+                    CLIP 01 / 04
+                </span>
+
+            </div>
+
+            <div class="progreso-fondo">
+                <div class="progreso" id="progreso"></div>
+            </div>
+
+            <div class="controles">
+
+                <button
+                    class="control"
+                    id="anterior"
+                    type="button"
+                >
+                    ← ANTERIOR
+                </button>
+
+                <button
+                    class="control control-principal"
+                    id="reproducir"
+                    type="button"
+                >
+                    ▶ REPRODUCIR
+                </button>
+
+                <button
+                    class="control"
+                    id="siguiente"
+                    type="button"
+                >
+                    SIGUIENTE →
+                </button>
+
+            </div>
+
+            <p class="nota">
+                Los videos se reproducen uno después del otro.<br>
+                Activa el sonido para disfrutar cada recuerdo.
+            </p>
+
+        </section>
+
+        <!-- MENSAJE AL TERMINAR -->
+
+        <section class="final" id="final">
+
+            <h2>
+                Y estos son solo algunos recuerdos...
+            </h2>
+
+            <p>
+                Espero que este nuevo año de tu vida
+                esté lleno de momentos tan bonitos
+                que quieras recordarlos una y otra vez.
+            </p>
+
+            <span>Feliz cumpleaños, Angyy 🍓♡</span>
+
+        </section>
+
+        <div class="decoracion">
+            ✧ · ♡ · ✧
+        </div>
+
+        <!-- NAVEGACIÓN -->
+
+        <nav class="navegacion">
+
+            <a href="carta.html" class="boton">
+                ← VOLVER A CARTA
+            </a>
+
+            <a href="sorpresa.html" class="boton boton-especial">
+                CONTINUAR A LA SORPRESA ↗
+            </a>
+
+        </nav>
+
+    </main>
+
+    <footer>
+        HECHO CON CARIÑO, ESPECIALMENTE PARA TI ♡
+    </footer>
+
+    <script>
+        /*
+          AGREGA AQUÍ LOS NOMBRES DE TUS VIDEOS.
+          Todos deben estar en la misma carpeta
+          que este archivo HTML.
+        */
+
+        const videos = [
+            {
+                archivo: "trend.mp4",
+                titulo: "♡"
+            },
+            {
+                archivo: "trend.2.mp4",
+                titulo: "♡"
+            },
+            {
+                archivo: "hombres.mp4",
+                titulo: "♡"
+            },
+            {
+                archivo: "noc.mp4",
+                titulo: "♡"
+            }
+        ];
+
+        let indiceActual = 0;
+
+        const video = document.getElementById("video");
+        const tituloVideo = document.getElementById("tituloVideo");
+        const contador = document.getElementById("contador");
+        const progreso = document.getElementById("progreso");
+        const botonReproducir = document.getElementById("reproducir");
+        const mensajeFinal = document.getElementById("final");
+
+        function cargarVideo(indice, reproducir = false) {
+            indiceActual = indice;
+
+            video.src = videos[indiceActual].archivo;
+            video.load();
+
+            tituloVideo.textContent = videos[indiceActual].titulo;
+
+            contador.textContent =
+                "CLIP " +
+                String(indiceActual + 1).padStart(2, "0") +
+                " / " +
+                String(videos.length).padStart(2, "0");
+
+            progreso.style.width = "0%";
+            mensajeFinal.style.display = "none";
+
+            if (reproducir) {
+                video.play().catch(() => {
+                    // En algunos navegadores debes tocar
+                    // reproducir manualmente.
+                });
+            }
+        }
+
+        function siguienteVideo() {
+            if (indiceActual < videos.length - 1) {
+                cargarVideo(indiceActual + 1, true);
+            } else {
+                video.pause();
+                mensajeFinal.style.display = "block";
+                mensajeFinal.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+            }
+        }
+
+        function videoAnterior() {
+            if (indiceActual > 0) {
+                cargarVideo(indiceActual - 1, true);
+            }
+        }
+
+        document
+            .getElementById("siguiente")
+            .addEventListener("click", siguienteVideo);
+
+        document
+            .getElementById("anterior")
+            .addEventListener("click", videoAnterior);
+
+        botonReproducir.addEventListener("click", () => {
+            if (video.paused) {
+                video.play().catch(() => {});
+            } else {
+                video.pause();
+            }
+        });
+
+        video.addEventListener("play", () => {
+            botonReproducir.textContent = "Ⅱ PAUSAR";
+        });
+
+        video.addEventListener("pause", () => {
+            botonReproducir.textContent = "▶ REPRODUCIR";
+        });
+
+        video.addEventListener("timeupdate", () => {
+            if (video.duration) {
+                const porcentaje =
+                    (video.currentTime / video.duration) * 100;
+
+                progreso.style.width = porcentaje + "%";
+            }
+        });
+
+        video.addEventListener("ended", siguienteVideo);
+
+        cargarVideo(0);
+    </script>
+
+</body>
+</html>

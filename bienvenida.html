@@ -1,0 +1,574 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Un bonito comienzo ♡</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --fondo: #100e10;
+            --tarjeta: #1b161a;
+            --granate: #79364e;
+            --rosa: #d9a0b2;
+            --blanco: #f8eef2;
+            --gris: #b9aab1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--fondo);
+            color: var(--blanco);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.12;
+            background-image: radial-gradient(#d9a0b2 0.6px, transparent 0.6px);
+            background-size: 24px 24px;
+            z-index: -1;
+        }
+
+        /* ENCABEZADO */
+
+        .barra {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 8%;
+            border-bottom: 1px solid #ffffff18;
+            animation: aparecer 1s ease both;
+        }
+
+        .marca {
+            color: var(--rosa);
+            font-size: 11px;
+            letter-spacing: 4px;
+        }
+
+        .corazon {
+            color: var(--rosa);
+            font-size: 23px;
+            animation: latido 2s infinite;
+        }
+
+        /* PORTADA */
+
+        .portada {
+            min-height: 75vh;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: center;
+            gap: 65px;
+            padding: 80px 10%;
+        }
+
+        .etiqueta {
+            color: var(--rosa);
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+        }
+
+        h1 {
+            font-size: clamp(48px, 6.5vw, 82px);
+            line-height: 0.98;
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            color: var(--rosa);
+            font-style: italic;
+        }
+
+        .descripcion {
+            max-width: 440px;
+            color: var(--gris);
+            line-height: 2;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .firma {
+            color: var(--rosa);
+            font: italic 25px 'Cormorant Garamond', serif;
+            margin-top: 25px;
+        }
+
+        /* TARJETA DECORATIVA */
+
+        .marco {
+            position: relative;
+            max-width: 380px;
+            width: 100%;
+            justify-self: center;
+            padding: 14px;
+            border: 1px solid #d9a0b255;
+            background: var(--tarjeta);
+            animation: flotar 5s ease-in-out infinite;
+        }
+
+        .marco-interior {
+            min-height: 390px;
+            padding: 35px 25px;
+            border: 1px solid #ffffff12;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background:
+                radial-gradient(ellipse at top, #79364e38, transparent 65%),
+                var(--tarjeta);
+        }
+
+        .simbolo {
+            color: var(--rosa);
+            font-size: 42px;
+            margin-bottom: 22px;
+        }
+
+        .marco-interior h2 {
+            font-size: 38px;
+            line-height: 1.1;
+            margin-bottom: 18px;
+        }
+
+        .marco-interior h2 span {
+            color: var(--rosa);
+            font-style: italic;
+        }
+
+        .marco-interior p {
+            color: var(--gris);
+            font-size: 11px;
+            line-height: 1.9;
+            max-width: 260px;
+        }
+
+        .estrellas {
+            color: var(--rosa);
+            letter-spacing: 8px;
+            margin-top: 28px;
+        }
+
+        .esquina {
+            position: absolute;
+            color: var(--rosa);
+            font-size: 22px;
+        }
+
+        .arriba-izquierda {
+            top: 5px;
+            left: 5px;
+        }
+
+        .abajo-derecha {
+            bottom: 5px;
+            right: 5px;
+        }
+
+        /* MENSAJE */
+
+        .mensaje {
+            padding: 75px 10%;
+            border-top: 1px solid #ffffff18;
+        }
+
+        .encabezado {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .encabezado .etiqueta {
+            margin-bottom: 15px;
+        }
+
+        .encabezado h2 {
+            font-size: clamp(36px, 5vw, 54px);
+            margin-bottom: 15px;
+        }
+
+        .encabezado h2 span {
+            color: var(--rosa);
+            font-style: italic;
+        }
+
+        .encabezado p {
+            color: var(--gris);
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        .tarjetas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .tarjeta {
+            background: var(--tarjeta);
+            border: 1px solid #ffffff12;
+            padding: 30px 24px;
+            text-align: center;
+            transition: 0.35s;
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-6px);
+            border-color: #d9a0b277;
+            background: #241920;
+        }
+
+        .tarjeta .icono {
+            color: var(--rosa);
+            font-size: 27px;
+            margin-bottom: 17px;
+        }
+
+        .tarjeta h3 {
+            font-size: 25px;
+            margin-bottom: 12px;
+        }
+
+        .tarjeta p {
+            color: var(--gris);
+            font-size: 11px;
+            line-height: 1.9;
+        }
+
+        /* FRASE FINAL */
+
+        .frase {
+            margin: 0 10% 80px;
+            padding: 50px 25px;
+            text-align: center;
+            border: 1px solid #d9a0b233;
+            background:
+                radial-gradient(ellipse at center, #79364e25, transparent 75%),
+                var(--tarjeta);
+        }
+
+        .frase .adorno {
+            color: var(--rosa);
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .frase h2 {
+            max-width: 700px;
+            margin: auto;
+            font-size: clamp(30px, 4.5vw, 46px);
+            line-height: 1.25;
+            font-style: italic;
+        }
+
+        .frase h2 span {
+            color: var(--rosa);
+        }
+
+        .frase p {
+            color: var(--gris);
+            font-size: 11px;
+            margin-top: 20px;
+            letter-spacing: 1px;
+        }
+
+        /* BOTONES */
+
+        .navegacion {
+            text-align: center;
+            padding: 0 8% 75px;
+        }
+
+        .boton {
+            display: inline-block;
+            margin: 8px;
+            padding: 16px 23px;
+            color: var(--blanco);
+            background: var(--granate);
+            border: 1px solid #a35b76;
+            text-decoration: none;
+            font-size: 10px;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .boton:hover {
+            background: #9a4965;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px #79364e35;
+        }
+
+        .boton-secundario {
+            background: transparent;
+            border-color: #ffffff30;
+        }
+
+        .boton-secundario:hover {
+            background: var(--tarjeta);
+            border-color: var(--rosa);
+        }
+
+        /* PIE DE PÁGINA */
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: var(--gris);
+            border-top: 1px solid #ffffff18;
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        /* ANIMACIONES */
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes flotar {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes latido {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+        /* DISEÑO PARA CELULARES */
+
+        @media (max-width: 750px) {
+            .barra {
+                padding: 22px 7%;
+            }
+
+            .portada {
+                grid-template-columns: 1fr;
+                gap: 45px;
+                padding: 65px 8%;
+                text-align: center;
+            }
+
+            .descripcion {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .marco {
+                max-width: 340px;
+            }
+
+            .marco-interior {
+                min-height: 350px;
+            }
+
+            .mensaje {
+                padding: 65px 7%;
+            }
+
+            .tarjetas {
+                grid-template-columns: 1fr;
+            }
+
+            .frase {
+                margin: 0 7% 60px;
+                padding: 40px 22px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="barra">
+        <div class="marca">UN REGALO ESPECIAL PARA ALGUIEN ESPECIAL</div>
+        <div class="corazon">♡</div>
+    </header>
+
+    <main>
+
+        <!-- PORTADA DE BIENVENIDA -->
+
+        <section class="portada">
+
+            <div class="contenido">
+                <p class="etiqueta">Capítulo 01 · Un día tan bonito como tú.</p>
+
+                <h1>Hoy es un día<br>para <span>celebrarte.</span></h1>
+
+                <p class="descripcion">
+                    Hoy no quería regalarte solamente unas palabras.
+                    Quería crear un pequeño lugar donde pudieras
+                    encontrar un poquito del cariño que te tengo,
+                    de los recuerdos que compartimos y de todo lo
+                    bonito que deseo para ti.
+                </p>
+
+                <p class="descripcion">
+                    Así que bienvenida a este pequeño detalle.
+                    Lo preparé pensando en ti y espero que disfrutes
+                    cada parte tanto como yo disfruté creándolo.
+                </p>
+
+                <div class="firma">Este espacio es tuyo. ♡</div>
+            </div>
+
+            <div class="marco">
+                <span class="esquina arriba-izquierda">✧</span>
+                <span class="esquina abajo-derecha">✧</span>
+
+                <div class="marco-interior">
+                    <div class="simbolo">♡</div>
+
+                    <h2>Un pequeño<br><span>universo para ti.</span></h2>
+
+                    <p>
+                        Hecho de recuerdos, palabras bonitas
+                        y un poquito de todo lo que quiero
+                        desearte en este día especial.
+                    </p>
+
+                    <div class="estrellas">✧ · ✧</div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- TRES MENSAJES -->
+
+        <section class="mensaje">
+
+            <div class="encabezado">
+                <p class="etiqueta">Antes de continuar</p>
+
+                <h2>Quiero que recuerdes<br><span>tres pequeñas cosas.</span></h2>
+
+                <p>
+                    Porque a veces las palabras más sencillas
+                    también pueden significar muchísimo.
+                </p>
+            </div>
+
+            <div class="tarjetas">
+
+                <article class="tarjeta">
+                    <div class="icono">✧</div>
+                    <h3>Eres especial</h3>
+                    <p>
+                        Nunca olvides que tu manera de ser,
+                        tus ocurrencias y tu presencia pueden
+                        hacer más bonitos los días de quienes
+                        te rodean.
+                    </p>
+                </article>
+
+                <article class="tarjeta">
+                    <div class="icono">♡</div>
+                    <h3>Mereces cosas bonitas</h3>
+                    <p>
+                        Mereces risas sinceras, amistades
+                        bonitas, momentos inolvidables y
+                        oportunidades que te acerquen a
+                        aquello que sueñas.
+                    </p>
+                </article>
+
+                <article class="tarjeta">
+                    <div class="icono">☾</div>
+                    <h3>Disfruta tu historia</h3>
+                    <p>
+                        Todavía quedan muchísimos lugares
+                        por conocer, historias por contar
+                        y recuerdos que algún día mirarás
+                        con una sonrisa.
+                    </p>
+                </article>
+
+            </div>
+
+        </section>
+
+        <!-- FRASE FINAL -->
+
+        <section class="frase">
+            <div class="adorno">✧ ♡ ✧</div>
+
+            <h2>
+                Ojalá la vida te devuelva<br>
+                toda la alegría que <span>compartes.</span>
+            </h2>
+
+            <p>QUE ESTE DÍA SEA TAN BONITO COMO TÚ LO MERECES.</p>
+        </section>
+
+        <!-- NAVEGACIÓN -->
+
+        <nav class="navegacion">
+            <a href="index.html" class="boton boton-secundario">
+                ← VOLVER AL ÍNDICE
+            </a>
+
+            <a href="carta.html" class="boton">
+                CONTINUAR CON TU CARTA ↗
+            </a>
+        </nav>
+
+    </main>
+
+    <footer>
+        HECHO CON CARIÑO, ESPECIALMENTE PARA TI ♡
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,397 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un regalo especial</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --fondo: #100e10;
+            --tarjeta: #1b161a;
+            --granate: #79364e;
+            --rosa: #d9a0b2;
+            --blanco: #f8eef2;
+            --gris: #b9aab1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--fondo);
+            color: var(--blanco);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.12;
+            background-image: radial-gradient(#d9a0b2 0.6px, transparent 0.6px);
+            background-size: 24px 24px;
+            z-index: -1;
+        }
+
+        .barra {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 8%;
+            border-bottom: 1px solid #ffffff18;
+            animation: aparecer 1s ease both;
+        }
+
+        .marca {
+            color: var(--rosa);
+            font-size: 11px;
+            letter-spacing: 4px;
+        }
+
+        .corazon {
+            color: var(--rosa);
+            font-size: 22px;
+            animation: latido 2s infinite;
+        }
+
+        .portada {
+            min-height: 85vh;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: center;
+            gap: 65px;
+            padding: 80px 10%;
+        }
+
+        .etiqueta {
+            color: var(--rosa);
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+        }
+
+        h1 {
+            font-size: clamp(50px, 7vw, 88px);
+            line-height: 0.98;
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            color: var(--rosa);
+            font-style: italic;
+        }
+
+        .descripcion {
+            max-width: 440px;
+            color: var(--gris);
+            line-height: 1.9;
+            font-size: 13px;
+            margin-bottom: 35px;
+        }
+
+        .boton {
+            display: inline-block;
+            padding: 16px 24px;
+            color: var(--blanco);
+            background: var(--granate);
+            border: 1px solid #a35b76;
+            text-decoration: none;
+            font-size: 10px;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .boton:hover {
+            background: #9a4965;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px #79364e35;
+        }
+
+        .foto-marco {
+            position: relative;
+            padding: 12px;
+            border: 1px solid #d9a0b255;
+            max-width: 400px;
+            width: 100%;
+            justify-self: center;
+            animation: flotar 5s ease-in-out infinite;
+        }
+
+        .foto-marco::before {
+            content: "PARA TI, CON CARIÑO";
+            position: absolute;
+            top: -12px;
+            right: 18px;
+            padding: 7px 12px;
+            background: var(--fondo);
+            color: var(--rosa);
+            font-size: 9px;
+            letter-spacing: 2px;
+        }
+
+        .foto-marco img {
+            display: block;
+            width: 100%;
+            height: 430px;
+            object-fit: cover;
+            background: var(--tarjeta);
+        }
+
+        .nota-foto {
+            color: var(--gris);
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            text-align: center;
+            font-size: 18px;
+            padding: 14px 0 4px;
+        }
+
+        .indice {
+            padding: 80px 10% 100px;
+            border-top: 1px solid #ffffff18;
+        }
+
+        .encabezado-indice {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .encabezado-indice h2 {
+            font-size: clamp(36px, 5vw, 54px);
+            margin-bottom: 12px;
+        }
+
+        .encabezado-indice p {
+            color: var(--gris);
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .capitulos {
+            max-width: 850px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .capitulo {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 25px 22px;
+            min-height: 125px;
+            text-decoration: none;
+            color: var(--blanco);
+            background: var(--tarjeta);
+            border: 1px solid #ffffff12;
+            transition: 0.35s;
+        }
+
+        .capitulo:hover {
+            border-color: var(--rosa);
+            transform: translateY(-5px);
+            background: #241920;
+        }
+
+        .numero {
+            color: var(--rosa);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 35px;
+        }
+
+        .texto-capitulo {
+            flex: 1;
+        }
+
+        .texto-capitulo h3 {
+            font-size: 24px;
+            margin-bottom: 7px;
+        }
+
+        .texto-capitulo p {
+            color: var(--gris);
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        .flecha {
+            color: var(--rosa);
+            font-size: 20px;
+            transition: 0.3s;
+        }
+
+        .capitulo:hover .flecha {
+            transform: translate(4px, -4px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: var(--gris);
+            border-top: 1px solid #ffffff18;
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        @keyframes aparecer {
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes flotar {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes latido {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        @media (max-width: 750px) {
+            .barra {
+                padding: 22px 7%;
+            }
+
+            .portada {
+                grid-template-columns: 1fr;
+                gap: 50px;
+                padding: 65px 8%;
+                text-align: center;
+            }
+
+            .descripcion {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .foto-marco {
+                max-width: 340px;
+            }
+
+            .foto-marco img {
+                height: 360px;
+            }
+
+            .indice {
+                padding: 65px 7%;
+            }
+
+            .capitulos {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="barra">
+        <div class="marca">UN REGALO ESPECIAL PARA ALGUIEN ESPECIAL</div>
+        <div class="corazon">♡</div>
+    </header>
+
+    <main>
+        <section class="portada">
+            <div class="contenido">
+                <p class="etiqueta">Un pequeño detalle para ti</p>
+
+                <h1>Para alguien<br>muy <span>especial.</span></h1>
+
+                <p class="descripcion">
+                    Hay personas que hacen más bonitos nuestros días
+                    sin siquiera darse cuenta. Este pequeño espacio
+                    está hecho para celebrar tu existencia y recordarte
+                    lo mucho que significas.
+                </p>
+
+                <a href="#indice" class="boton">
+                    DESCUBRE TU SORPRESA ↗
+                </a>
+            </div>
+
+            <div class="foto-marco">
+                <img src="🍒🍓.jpg" alt="Una fotografía de nosotras">
+                <p class="nota-foto">Nos encanta tomarnos fts✨</p>
+            </div>
+        </section>
+
+        <section class="indice" id="indice">
+            <div class="encabezado-indice">
+                <p class="etiqueta">Hecho especialmente para ti</p>
+                <h2>Un regalo en capítulos</h2>
+                <p>Abre cada apartado y descubre lo que preparé para ti.</p>
+            </div>
+
+            <div class="capitulos">
+                <a href="bienvenida.html" class="capitulo">
+                    <div class="numero">01</div>
+                    <div class="texto-capitulo">
+                        <h3>Un bonito comienzo</h3>
+                        <p>Una bienvenida hecha con cariño.</p>
+                    </div>
+                    <div class="flecha">↗</div>
+                </a>
+
+                <a href="carta.html" class="capitulo">
+                    <div class="numero">02</div>
+                    <div class="texto-capitulo">
+                        <h3>Unas palabras para ti</h3>
+                        <p>Todo eso que a veces cuesta decir.</p>
+                    </div>
+                    <div class="flecha">↗</div>
+                </a>
+
+                <a href="recuerdos.html" class="capitulo">
+                    <div class="numero">03</div>
+                    <div class="texto-capitulo">
+                        <h3>Nuestros recuerdos</h3>
+                        <p>Momentos que merecen quedarse.</p>
+                    </div>
+                    <div class="flecha">↗</div>
+                </a>
+
+                <a href="sorpresa.html" class="capitulo">
+                    <div class="numero">04</div>
+                    <div class="texto-capitulo">
+                        <h3>Una última sorpresa</h3>
+                        <p>Un detalle más para hacerte sonreír.</p>
+                    </div>
+                    <div class="flecha">↗</div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        HECHO CON CARIÑO ♡
+    </footer>
+</body>
+</html>

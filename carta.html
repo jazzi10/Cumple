@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Una carta especial</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --fondo: #100b0e;
+            --fondo-card: #191015;
+            --rosa: #d99aaa;
+            --rosa-claro: #f0c5cf;
+            --vino: #762d43;
+            --texto: #f5e8eb;
+            --texto-suave: #bdaab0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: var(--fondo);
+            color: var(--texto);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(
+                var(--rosa) 0.7px,
+                transparent 0.7px
+            );
+            background-size: 30px 30px;
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* ENCABEZADO */
+
+        .barra {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 8%;
+            border-bottom: 1px solid #ffffff18;
+            animation: aparecer 1s ease both;
+            gap: 20px;
+        }
+
+        .marca {
+            color: var(--rosa);
+            font-size: 11px;
+            letter-spacing: 4px;
+            font-weight: 400;
+        }
+
+        .corazon {
+            color: var(--rosa);
+            font-size: 23px;
+            animation: latido 2s infinite;
+            flex-shrink: 0;
+        }
+
+        /* CONTENIDO PRINCIPAL */
+
+        .contenedor {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 8% 100px;
+        }
+
+        .etiqueta {
+            color: var(--rosa);
+            font-size: 10px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 25px;
+            animation: aparecer 1s ease both;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(42px, 7vw, 76px);
+            line-height: 1.05;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: subir 1s ease both;
+        }
+
+        h1 span {
+            color: var(--rosa);
+            font-style: italic;
+        }
+
+        .subtitulo {
+            color: var(--texto-suave);
+            text-align: center;
+            font-size: 12px;
+            line-height: 1.9;
+            font-weight: 300;
+            margin-bottom: 55px;
+            animation: aparecer 1.3s ease both;
+        }
+
+        /* TARJETA DE LA CARTA */
+
+        .carta {
+            position: relative;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 55px 60px;
+            background: linear-gradient(
+                145deg,
+                #21141b,
+                #160e13
+            );
+            border: 1px solid #d99aaa35;
+            box-shadow: 0 20px 70px #00000030;
+            animation: subir 1.2s ease both;
+        }
+
+        .carta::before {
+            content: "♡";
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: var(--rosa);
+            font-size: 24px;
+            opacity: 0.7;
+        }
+
+        .saludo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-style: italic;
+            color: var(--rosa-claro);
+            margin-bottom: 30px;
+        }
+
+        .texto-carta {
+            font-size: 13px;
+            font-weight: 300;
+            line-height: 2.3;
+            color: #e5d6dc;
+        }
+
+        .texto-carta p {
+            margin-bottom: 24px;
+        }
+
+        .firma {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 31px;
+            font-style: italic;
+            color: var(--rosa);
+            text-align: right;
+            margin-top: 35px;
+        }
+
+        .decoracion {
+            text-align: center;
+            color: var(--rosa);
+            font-size: 18px;
+            letter-spacing: 12px;
+            margin: 45px 0;
+            opacity: 0.8;
+        }
+
+        /* BOTONES DE NAVEGACIÓN */
+
+        .navegacion {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 45px;
+        }
+
+        .boton {
+            display: inline-block;
+            padding: 15px 30px;
+            color: var(--rosa-claro);
+            text-decoration: none;
+            border: 1px solid #d99aaa70;
+            background: transparent;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-align: center;
+            transition: 0.3s ease;
+        }
+
+        .boton:hover {
+            background-color: var(--vino);
+            border-color: var(--vino);
+            transform: translateY(-3px);
+        }
+
+        /* PIE DE PÁGINA */
+
+        footer {
+            padding: 25px 8%;
+            border-top: 1px solid #ffffff18;
+            text-align: center;
+            color: var(--texto-suave);
+            font-size: 9px;
+            letter-spacing: 3px;
+            line-height: 2;
+        }
+
+        /* ANIMACIONES */
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes subir {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes latido {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+        /* DISEÑO PARA CELULARES */
+
+        @media (max-width: 750px) {
+            .barra {
+                padding: 22px 7%;
+            }
+
+            .marca {
+                font-size: 11px;
+                letter-spacing: 4px;
+            }
+
+            .corazon {
+                font-size: 23px;
+                flex-shrink: 0;
+            }
+
+            .contenedor {
+                padding: 65px 7% 75px;
+            }
+
+            .etiqueta {
+                font-size: 9px;
+                letter-spacing: 4px;
+                line-height: 1.8;
+            }
+
+            h1 {
+                font-size: clamp(40px, 11vw, 60px);
+            }
+
+            .subtitulo {
+                margin-bottom: 40px;
+                font-size: 11px;
+            }
+
+            .carta {
+                padding: 45px 25px;
+            }
+
+            .saludo {
+                font-size: 28px;
+            }
+
+            .texto-carta {
+                font-size: 12px;
+                line-height: 2.1;
+            }
+
+            .firma {
+                font-size: 28px;
+            }
+
+            .navegacion {
+                flex-direction: column;
+                gap: 18px;
+                margin-top: 35px;
+            }
+
+            .boton {
+                width: 100%;
+                max-width: 300px;
+                padding: 14px 18px;
+                font-size: 9px;
+                letter-spacing: 2px;
+            }
+
+            footer {
+                font-size: 8px;
+                letter-spacing: 2px;
+                line-height: 2;
+            }
+        }
+
+        /* CELULARES PEQUEÑOS */
+
+        @media (max-width: 380px) {
+            .barra {
+                padding: 20px 6%;
+                gap: 12px;
+            }
+
+            .marca {
+                font-size: 10px;
+                letter-spacing: 3px;
+                line-height: 1.8;
+            }
+
+            .contenedor {
+                padding-right: 6%;
+                padding-left: 6%;
+            }
+
+            .carta {
+                padding: 40px 20px;
+            }
+
+            .saludo {
+                font-size: 25px;
+            }
+        }
+        /* BOTÓN COLOR BORGOÑA */
+
+.navegacion a.boton-especial {
+    background-color: #762D43 !important;
+    border: 1px solid #9B4966 !important;
+    color: #F5E8EB !important;
+}
+
+.navegacion a.boton-especial:hover {
+    background-color: #542033 !important;
+    border-color: #D99AAA !important;
+    color: #FFFFFF !important;
+}
+    </style>
+</head>
+
+<body>
+
+    <!-- ENCABEZADO -->
+
+    <header class="barra">
+
+        <div class="marca">
+            UN REGALO ESPECIAL PARA ALGUIEN ESPECIAL
+        </div>
+
+        <div class="corazon">♡</div>
+
+    </header>
+
+    <!-- CONTENIDO -->
+
+    <main class="contenedor">
+
+        <p class="etiqueta">
+            ESCRITO CON CARIÑO
+        </p>
+
+        <h1>
+            Una carta<br>
+            <span>para ti.</span>
+        </h1>
+
+        <p class="subtitulo">
+            Hay cosas que merecen escribirse<br>
+            en lugar de quedarse en silencio.
+        </p>
+
+        <!-- CARTA DE CUMPLEAÑOS -->
+
+        <article class="carta">
+
+            <h2 class="saludo">
+                Querida Angyy🍓:
+            </h2>
+
+            <div class="texto-carta">
+
+                <p>
+                    Hoy es un día especial, y no quería dejarlo pasar
+                    sin dedicarte unas palabras. A veces es difícil
+                    encontrar la manera exacta de expresar lo que
+                    alguien significa para nosotros, pero quería
+                    intentarlo.
+                </p>
+
+                <p>
+                    Espero que este nuevo año de tu vida esté lleno
+                    de momentos bonitos, de personas que te quieran
+                    sinceramente, de sueños que poco a poco se hagan
+                    realidad y de razones para sonreír incluso en
+                    los días más complicados.
+                </p>
+
+                <p>
+                    Quiero que recuerdes que eres una persona
+                    especial y que tu presencia puede hacer más
+                    bonitos los días de quienes tienen la suerte
+                    de conocerte. Ojalá nunca te falten motivos
+                    para seguir siendo tú.
+                </p>
+
+                <p>
+                    Gracias por formar parte de mi vida y por todos
+                    esos pequeños momentos que, aunque parezcan
+                    simples, pueden terminar convirtiéndose en
+                    recuerdos que uno guarda con mucho cariño.
+                </p>
+
+                <p>
+                    Feliz cumpleaños. Deseo que la vida te sorprenda
+                    con cosas preciosas, que recibas el mismo cariño
+                    que das y que este sea el comienzo de una etapa
+                    llena de experiencias que valga la pena recordar.
+                </p>
+
+            </div>
+
+            <div class="firma">
+                Con mucho cariño ♡
+            </div>
+
+        </article>
+
+        <div class="decoracion">
+            ✧ · ♡ · ✧
+        </div>
+
+        <!-- BOTONES SEPARADOS -->
+
+        <nav class="navegacion">
+
+            <a href="bienvenida.html" class="boton">
+                ← VOLVER A BIENVENIDA 
+            </a>
+
+            <a href="recuerdos.html" class="boton boton-especial">
+    CONTINUAR A RECUERDOS ↗
+</a>
+        </nav>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+
+    <footer>
+        HECHO CON CARIÑO, ESPECIALMENTE PARA TI ♡
+    </footer>
+
+</body>
+</html>
